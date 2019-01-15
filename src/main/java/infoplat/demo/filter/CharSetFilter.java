@@ -9,7 +9,6 @@ import java.io.IOException;
 @Configuration
 public class CharSetFilter implements Filter {
 
-    private static String encoding = "UTF-8";
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -17,6 +16,7 @@ public class CharSetFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest Request, ServletResponse Response, FilterChain filterChain) throws IOException, ServletException {
+        String encoding = "UTF-8";
         Request.setCharacterEncoding(encoding);
         Response.setCharacterEncoding(encoding);
         filterChain.doFilter(Request,Response);
