@@ -1,5 +1,7 @@
 package infoplat.demo.controller;
 
+import infoplat.demo.serviceImpl.ServiceImpl;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,22 +11,26 @@ import java.io.IOException;
 
 @WebServlet(name = "administratorsServlet.do")
 public class administratorsServlet extends HttpServlet {
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String but = request.getParameter("button");
-
+        String userphone = request.getParameter("userphone");
+        String password = request.getParameter("password");
+        ServiceImpl service = new ServiceImpl();
         if ("1".equals(but)) {
 //展示用户列表
 
         } else if ("2".equals(but)) {
 //新增用户信息
 
+    service.insert(userphone,password);
         } else if ("3".equals(but)) {
 //修改用户信息
-
+    service.update(userphone,password);
         } else if ("4".equals(but)) {
 //删除用户信息
-
+    service.delete(userphone,password);
         } else if ("5".equals(but)) {
 //展示信息列表
 
@@ -47,6 +53,7 @@ public class administratorsServlet extends HttpServlet {
 //设置留言
         }
     }
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
