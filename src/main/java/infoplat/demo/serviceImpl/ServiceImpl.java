@@ -1,6 +1,7 @@
 package infoplat.demo.serviceImpl;
 
 import infoplat.demo.daoImpl.Daoimpl;
+import infoplat.demo.entity.User;
 import infoplat.demo.service.Service;
 
 public class ServiceImpl implements Service {
@@ -10,6 +11,7 @@ public class ServiceImpl implements Service {
     @Override
     public void login(String userphone, String password) {
 
+        dao.get(User.class,userphone,password);
     }
 
     @Override
@@ -19,14 +21,15 @@ public class ServiceImpl implements Service {
     }
 
     @Override
-    public void update(String userphone, String password) {
-
+    public void update(String username, String userphone) {
+        String sql = "update tadmin SET sName = ?,sTel = ? where iAdminId=1;";
+        dao.update(sql,username,userphone);
     }
 
     @Override
-    public void delete(String userphone, String password) {
-
+    public void delete(String username) {
+        String sql = "delete from tadmin where sName = ?";
+        dao.update(sql,username);
     }
-    //增加
 
 }

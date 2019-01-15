@@ -15,6 +15,7 @@ public class administratorsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String but = request.getParameter("button");
+        String username = request.getParameter("username");
         String userphone = request.getParameter("userphone");
         String password = request.getParameter("password");
         ServiceImpl service = new ServiceImpl();
@@ -24,13 +25,13 @@ public class administratorsServlet extends HttpServlet {
         } else if ("2".equals(but)) {
 //新增用户信息
 
-    service.insert(userphone,password);
+    service.insert(username,userphone);
         } else if ("3".equals(but)) {
 //修改用户信息
     service.update(userphone,password);
         } else if ("4".equals(but)) {
 //删除用户信息
-    service.delete(userphone,password);
+    service.delete(username);
         } else if ("5".equals(but)) {
 //展示信息列表
 

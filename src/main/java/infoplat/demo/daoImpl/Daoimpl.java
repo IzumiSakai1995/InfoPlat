@@ -42,15 +42,15 @@ public class Daoimpl implements Dao {
     public <T> T get(Class<T> clazz, String sql, Object... args) {
 
 
-        T entity = null;
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        try {
-            connection = DataSourcesManager.getConnection();
-            preparedStatement = JDBCUtils.getPreparedStatement(Objects.requireNonNull(connection),sql);
-            Map<String,Object> values = new HashMap<>();
-            for (int i = 0;i < args.length;i++){
+                T entity = null;
+                Connection connection = null;
+                PreparedStatement preparedStatement = null;
+                ResultSet resultSet = null;
+                try {
+                    connection = DataSourcesManager.getConnection();
+                    preparedStatement = JDBCUtils.getPreparedStatement(Objects.requireNonNull(connection),sql);
+                    Map<String,Object> values = new HashMap<>();
+                    for (int i = 0;i < args.length;i++){
                 preparedStatement.setObject(i+1,args[i]);
             }
 
