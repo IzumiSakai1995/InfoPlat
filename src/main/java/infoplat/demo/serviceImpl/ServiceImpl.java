@@ -11,6 +11,7 @@ public class ServiceImpl implements Service {
     //登录
     @Override
     public void login(String userphone, String password) {
+        String sql = "select sName from tadmin whrer sTel = ? and sPwd = ?";
        User user = dao.get(User.class,userphone,password);
        if (user==null){
            System.out.println("查无此人");
@@ -26,7 +27,9 @@ public class ServiceImpl implements Service {
         String sql = "select sName from tadmin where sTel = ? and sPwd = ?";
         User user = dao.get(User.class,sql,sTel,sPwd);
         System.out.println(user);
+
     }
+
 
     @Override
     public void insert(String userphone, String password) {
