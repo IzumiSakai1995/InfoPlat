@@ -20,14 +20,16 @@ public class ServiceImpl implements Service {
        }
     }
 
+
+
     @Test
     public void test(){
+        // TODO: 2019/1/15 测试方法  项目结束后删除
         String sTel = "13086617754";
         String sPwd = "E10ADC3949BA59ABBE56E057F20F883E";
         String sql = "select sName from tadmin where sTel = ? and sPwd = ?";
         User user = dao.get(User.class,sql,sTel,sPwd);
         System.out.println(user);
-
     }
 
 
