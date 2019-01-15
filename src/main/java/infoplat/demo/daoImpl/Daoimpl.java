@@ -3,7 +3,7 @@ package infoplat.demo.daoImpl;
 import infoplat.demo.dao.Dao;
 import infoplat.demo.utils.DataSourcesManager;
 import infoplat.demo.utils.JDBCUtils;
-import org.springframework.util.ReflectionUtils;
+import infoplat.demo.utils.ReflectionUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +11,11 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
+/**
+ * @author Kael
+ */
 public class Daoimpl implements Dao {
     @Override
     public void update(String sql, Object... args){
@@ -19,8 +23,7 @@ public class Daoimpl implements Dao {
         PreparedStatement preparedStatement = null;
         try{
             connection = DataSourcesManager.getConnection();
-            System.out.println(sql);
-            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement = JDBCUtils.getPreparedStatement(Objects.requireNonNull(connection),sql);
             for (int i = 0;i < args.length;i++){
                 preparedStatement.setObject(i+1,args[i]);
             }
@@ -34,10 +37,6 @@ public class Daoimpl implements Dao {
 
     /**
      * 获取对象
-     *
-     * @param clazz
-     * @param sql
-     * @param args
      */
     @Override
     public <T> T get(Class<T> clazz, String sql, Object... args) {
@@ -49,7 +48,7 @@ public class Daoimpl implements Dao {
         ResultSet resultSet = null;
         try {
             connection = DataSourcesManager.getConnection();
-            preparedStatement = JDBCUtils.getPreparedStatement(connection,sql);
+            preparedStatement = JDBCUtils.getPreparedStatement(Objects.requireNonNull(connection),sql);
             Map<String,Object> values = new HashMap<>();
             for (int i = 0;i < args.length;i++){
                 preparedStatement.setObject(i+1,args[i]);
