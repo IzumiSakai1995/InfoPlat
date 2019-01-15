@@ -3,6 +3,7 @@ package infoplat.demo.serviceImpl;
 import infoplat.demo.daoImpl.Daoimpl;
 import infoplat.demo.entity.User;
 import infoplat.demo.service.Service;
+import org.junit.Test;
 
 public class ServiceImpl implements Service {
 
@@ -10,8 +11,21 @@ public class ServiceImpl implements Service {
     //登录
     @Override
     public void login(String userphone, String password) {
+       User user = dao.get(User.class,userphone,password);
+       if (user==null){
+           System.out.println("查无此人");
+       }else {
+           // TODO: 2019/1/15 重定向或者转发
+       }
+    }
 
-        dao.get(User.class,userphone,password);
+    @Test
+    public void test(){
+        String sTel = "13086617754";
+        String sPwd = "E10ADC3949BA59ABBE56E057F20F883E";
+        String sql = "select sName from tadmin where sTel = ? and sPwd = ?";
+        User user = dao.get(User.class,sql,sTel,sPwd);
+        System.out.println(user);
     }
 
     @Override

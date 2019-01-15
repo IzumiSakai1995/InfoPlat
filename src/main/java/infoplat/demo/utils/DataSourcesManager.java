@@ -14,13 +14,13 @@ public class DataSourcesManager {
 
     static {
         DATA_SOURCE.setDriverClassName("com.mysql.jdbc.Driver");
-        DATA_SOURCE.setUrl("jdbc:mysql://127.0.0.1:3306/test?serverTimezone=PRC&characterEncoding=utf-8&useSSL=true");
+        DATA_SOURCE.setUrl("jdbc:mysql://10.25.194.117/user?serverTimezone=PRC&characterEncoding=utf-8&useSSL=true");
 //		DATA_SOURCE.setDriverClassName("oracle.jdbc.OracleDriver");    //驱动标识符
 //		DATA_SOURCE.setUrl("jdbc:oracle:thin:@localhost:1521:XE"); //链接字符串
 
         DATA_SOURCE.setUsername("root");
 //		DATA_SOURCE.setUsername("SYSTEM");
-        DATA_SOURCE.setPassword("950519lz");
+        DATA_SOURCE.setPassword("12345678");
 
         // 设置最大连接数
         DATA_SOURCE.setMaxTotal(25);

@@ -47,6 +47,7 @@ public class Daoimpl implements Dao {
                 PreparedStatement preparedStatement = null;
                 ResultSet resultSet = null;
                 try {
+                    System.out.println(sql);
                     connection = DataSourcesManager.getConnection();
                     preparedStatement = JDBCUtils.getPreparedStatement(Objects.requireNonNull(connection),sql);
                     Map<String,Object> values = new HashMap<>();
