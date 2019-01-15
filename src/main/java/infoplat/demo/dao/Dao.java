@@ -1,6 +1,18 @@
 package infoplat.demo.dao;
 
-import java.io.Serializable;
+import infoplat.demo.utils.JDBCUtils;
 
-public class Dao implements Serializable {
+import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+public interface Dao {
+    /**
+    * 执行增，删，改操作
+    * */
+    public void update(String sql, Object... args);
+    /**
+    * 获取对象
+    * */
+    public <T> T get(Class<T> clazz,String sql,Object ... args);
 }
