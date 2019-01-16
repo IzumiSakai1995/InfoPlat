@@ -5,21 +5,39 @@ import infoplat.demo.entity.User;
 import infoplat.demo.service.Service;
 import org.junit.Test;
 
+import javax.jws.soap.SOAPBinding;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
 public class ServiceImpl implements Service {
 
     Daoimpl dao = new Daoimpl();
     //登录
     @Override
-    public void login(String userphone, String password) {
+    public Map<String, Object> login(String userphone, String password) {
         String sql = "select sName from tadmin whrer sTel = ? and sPwd = ?";
        User user = dao.get(User.class,userphone,password);
+       Map<String,Object> map = new LinkedHashMap<>();
        if (user==null){
-           System.out.println("查无此人");
+           map.put("status",-1);
+           map.put("text","密码或账号错误");
+           return map;
        }else {
-           // TODO: 2019/1/15 重定向或者转发
+           map.put("status",1);
+           map.put("text","登录成功");
+           return map;
        }
     }
 
+    //查询所以用户
+    @Override
+    public List<Map<String, Object> >query() {
+        String sql ="select iAdminId,sName,dtInsert,dtUpdate,iRoleId\n" +
+                " from tAdmin";
+        User user = dao.get(User.class,"");
+        return null;
+    }
 
 
     @Test
