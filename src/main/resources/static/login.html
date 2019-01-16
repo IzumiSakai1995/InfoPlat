@@ -4,14 +4,33 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+<script src="js/jquery-3.3.1.js">
+
+</script>
 <body>
-<form>
-    <input type="text" name="username" id="username">
+    <input type="text" name="userPhone" id="userPhone">
     <input type="password" name="password" id="password">
     <button>登陆</button>
-</form>
 </body>
 <script>
-
+    $("button").click(function () {
+        var obj = new Object();
+        obj.userPhone = $("#userPhone").val();
+        obj.password =  $("#password").val();
+        console.log(userPhone);
+        console.log(password);
+        $.ajax({
+            url:"/login/",
+            dataType:"json",
+            data:obj,
+            type:"post",
+            success:function (data) {
+                console.log(data)
+            },
+            error(msg){
+                console.log(msg)
+            }
+        })
+    })
 </script>
 </html>

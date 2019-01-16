@@ -3,7 +3,6 @@ package infoplat.demo.serviceImpl;
 import infoplat.demo.daoImpl.Daoimpl;
 import infoplat.demo.entity.User;
 import infoplat.demo.service.Service;
-import org.junit.Test;
 
 import javax.jws.soap.SOAPBinding;
 import java.util.ArrayList;
@@ -17,8 +16,9 @@ public class ServiceImpl implements Service {
     //登录
     @Override
     public Map<String, Object> login(String userphone, String password) {
-        String sql = "select sName,iAdminId from tadmin where sTel = ? and sPwd = ?";
-       User user = dao.get(User.class,userphone,password);
+        String sql = "select sName from tadmin where sTel = ? and sPwd = ?";
+       User user = dao.get(User.class,sql,userphone,password);
+        System.out.println(user);
        Map<String,Object> map = new LinkedHashMap<>();
        if (user==null){
            map.put("status",-1);
@@ -55,31 +55,6 @@ public class ServiceImpl implements Service {
         return list;
     }
 
-    @Test
-    public void test1(){
-        // TODO: 2019/1/16 测试方法  项目结束后删除
-        String sql = "select a.sName sAdminName,a.sTel,\n" +
-                "\t\t\tf.iFunId,f.sFun,f.sName,f.iType,f.iParent\n" +
-                " from tAdmin a,tRoleFun rf,tFun f\n" +
-                "where a.iRoleId = rf.iRoleId\n" +
-                "  and rf.iFunId = f.iFunId\n" +
-                "  and a.sTel = ?";
-        List<Map<String,Object>> list = new ArrayList<>();
-        list = dao.select(sql,"131");
-        System.out.println(list);
-    }
-
-    //根据电话查询单个用户所以信息
-
-
-    @Test
-    public void test(){
-        // TODO: 2019/1/15 测试方法  项目结束后删除
-        String sql = "select sName,sTel,dtInsert ,iInsertAdmin,dtUpdate,iUpdateAdmin,iRoleId from tadmin ";
-        List<Map<String,Object>> list = new ArrayList<>();
-        list = dao.query(sql);
-        System.out.println(list);
-    }
 
 
     @Override
