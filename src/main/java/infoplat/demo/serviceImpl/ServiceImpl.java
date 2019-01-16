@@ -54,7 +54,7 @@ public class ServiceImpl implements Service {
 
     @Override
     public void insert(String userphone, String password) {
-        String sql = "insert into tadmin(sName,sTel,sPwd,dtInsert,iInsertAdmin,dtUpdate,iUpdateAdmin,iRoleId) VALUES(?,?,?,SYSDATE(),?,SYSDATE(),?,?);";
+        String sql = "insert into tAdmin(sName,sTel,sPwd,dtInsert,iInsertAdmin,dtUpdate,iUpdateAdmin,iRoleId) VALUES(?,?,?,SYSDATE(),?,SYSDATE(),?,?);";
         dao.update(sql,userphone,password);
     }
 

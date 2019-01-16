@@ -1,7 +1,11 @@
 package infoplat.demo.entity;
 
+import lombok.Data;
+
 import java.sql.Date;
 
+
+@Data
 public class User {
     private int iAdminId;
     private String sName;
@@ -28,7 +32,8 @@ public class User {
                 '}';
     }
 
-    public User() {
+    public User(){
+
     }
 
     public User(int iAdminId, String sName, String sTel, String sPwd, Date dtInsert, int iInsertAdmin, Date dtUpdate, int iUpdateAdmin, int iRole) {
@@ -43,39 +48,9 @@ public class User {
         this.iRole = iRole;
     }
 
-    public void setiAdminId(int iAdminId) {
-        this.iAdminId = iAdminId;
-    }
-
-    public void setsName(String sName) {
-        this.sName = sName;
-    }
-
-    public void setsTel(String sTel) {
-        this.sTel = sTel;
-    }
-
-    public void setsPwd(String sPwd) {
-        this.sPwd = sPwd;
-    }
-
-    public void setDtInsert(Date dtInsert) {
-        this.dtInsert = dtInsert;
-    }
-
-    public void setiInsertAdmin(int iInsertAdmin) {
-        this.iInsertAdmin = iInsertAdmin;
-    }
-
-    public void setDtUpdate(Date dtUpdate) {
-        this.dtUpdate = dtUpdate;
-    }
-
-    public void setiUpdateAdmin(int iUpdateAdmin) {
-        this.iUpdateAdmin = iUpdateAdmin;
-    }
-
-    public void setiRole(int iRole) {
-        this.iRole = iRole;
+}
+class TestUser{
+    public static void main(String[] args) {
+        User user= new User();
     }
 }
