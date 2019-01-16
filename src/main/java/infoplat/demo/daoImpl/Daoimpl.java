@@ -5,13 +5,8 @@ import infoplat.demo.utils.DataSourcesManager;
 import infoplat.demo.utils.JDBCUtils;
 import infoplat.demo.utils.ReflectionUtils;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.sql.*;
+import java.util.*;
 
 /**
  * @author Kael
@@ -80,5 +75,31 @@ public class Daoimpl implements Dao {
             JDBCUtils.release(resultSet,preparedStatement,connection);
         }
         return entity;
+    }
+
+    @Override
+    public List<Map<String, Object>> query(String sql) {
+        Connection connection = DataSourcesManager.getConnection();
+        PreparedStatement ps;
+        try {
+            ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            List<Map<String,Object>> list = new ArrayList<>();
+            while(rs.next()){
+                Map<String,Object> map = new LinkedHashMap<>();
+                map.put("sName",rs.getObject(1));
+                map.put("sTel",rs.getObject(2));
+                map.put("dtInsert",rs.getObject(3));
+                map.put("iInsertAdmin",rs.getObject(4));
+                map.put("dtUpdate",rs.getObject(5));
+                map.put("iUpdateAdmin",rs.getObject(6));
+                map.put("iRoleId",rs.getObject(7));
+                list.add(map);
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

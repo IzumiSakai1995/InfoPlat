@@ -6,6 +6,7 @@ import infoplat.demo.service.Service;
 import org.junit.Test;
 
 import javax.jws.soap.SOAPBinding;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +17,7 @@ public class ServiceImpl implements Service {
     //登录
     @Override
     public Map<String, Object> login(String userphone, String password) {
-        String sql = "select sName from tadmin whrer sTel = ? and sPwd = ?";
+        String sql = "select sName from tadmin where sTel = ? and sPwd = ?";
        User user = dao.get(User.class,userphone,password);
        Map<String,Object> map = new LinkedHashMap<>();
        if (user==null){
@@ -35,7 +36,7 @@ public class ServiceImpl implements Service {
     public List<Map<String, Object> >query() {
         String sql ="select iAdminId,sName,dtInsert,dtUpdate,iRoleId\n" +
                 " from tAdmin";
-        User user = dao.get(User.class,"");
+        User user = dao.get(User.class,sql,"");
         return null;
     }
 
@@ -44,11 +45,10 @@ public class ServiceImpl implements Service {
     @Test
     public void test(){
         // TODO: 2019/1/15 测试方法  项目结束后删除
-        String sTel = "13086617754";
-        String sPwd = "E10ADC3949BA59ABBE56E057F20F883E";
-        String sql = "select sName from tadmin where sTel = ? and sPwd = ?";
-        User user = dao.get(User.class,sql,sTel,sPwd);
-        System.out.println(user);
+        String sql = "select sName,sTel,dtInsert ,iInsertAdmin,dtUpdate,iUpdateAdmin,iRoleId from tadmin ";
+        List<Map<String,Object>> list = new ArrayList<>();
+        list = dao.query(sql);
+        System.out.println(list);
     }
 
 

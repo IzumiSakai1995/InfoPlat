@@ -5,6 +5,8 @@ import infoplat.demo.utils.JDBCUtils;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.util.List;
+import java.util.Map;
 
 public interface Dao {
     /**
@@ -15,4 +17,9 @@ public interface Dao {
     * 获取对象
     * */
     public <T> T get(Class<T> clazz,String sql,Object ... args);
+
+    /**
+     * 得到所以用户对象
+     */
+    public List<Map<String,Object>> query(String sql);
 }
