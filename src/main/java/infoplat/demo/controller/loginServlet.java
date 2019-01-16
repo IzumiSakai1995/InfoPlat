@@ -21,6 +21,7 @@ public class loginServlet extends HttpServlet {
         int a = (int) map.get("status");
         if (a>0){
             request.setAttribute("msg",map.get("text"));
+            request.setAttribute("id",map.get("id"));
             request.getRequestDispatcher("../主界面").forward(request,response);
             //跳转到主界面
         }else{

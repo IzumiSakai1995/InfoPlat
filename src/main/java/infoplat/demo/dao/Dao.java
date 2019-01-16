@@ -22,4 +22,8 @@ public interface Dao {
      * 得到所以用户对象
      */
     public List<Map<String,Object>> query(String sql);
+    /**
+     * 根据手机号查询该用户所以信息
+     */
+    public List<Map<String,Object>> select(String sql,String userphone);
 }

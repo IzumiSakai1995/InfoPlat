@@ -102,4 +102,32 @@ public class Daoimpl implements Dao {
             return null;
         }
     }
+
+    @Override
+    public List<Map<String, Object>> select(String sql, String userphone) {
+        Connection connection = DataSourcesManager.getConnection();
+        PreparedStatement ps;
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setObject(1,userphone);
+            ResultSet rs = ps.executeQuery();
+            List<Map<String,Object>> list = new ArrayList<>();
+            while(rs.next()){
+                Map<String,Object> map = new LinkedHashMap<>();
+                map.put("sName",rs.getObject(1));
+                map.put("sTel",rs.getObject(2));
+                map.put("iFunid",rs.getObject(3));
+                map.put("sFun",rs.getObject(4));
+                map.put("workName",rs.getObject(5));
+                map.put("iType",rs.getObject(6));
+                map.put("iParent",rs.getObject(7));
+                list.add(map);
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
 }
