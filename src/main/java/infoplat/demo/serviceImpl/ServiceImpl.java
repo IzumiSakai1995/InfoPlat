@@ -18,7 +18,7 @@ public class ServiceImpl implements Service {
     @Override
     public Map<String, Object> login(String userphone, String password) {
         String sql = "select sName,iAdminId from tadmin where sTel = ? and sPwd = ?";
-       User user = dao.get(User.class,userphone,password);
+       User user = dao.get(User.class,sql,userphone,password);
        Map<String,Object> map = new LinkedHashMap<>();
        if (user==null){
            map.put("status",-1);
